@@ -17,7 +17,7 @@ Ce fichier s'adresse aux assistants de programmation utilisés dans l'éditeur s
 - Validation des entrées par Bean Validation (`@NotNull`, `@Size`, `@Valid`) plutôt que par des vérifications manuelles dispersées.
 - Exceptions métier en classes dédiées, traduites en réponses HTTP par un `@ControllerAdvice`.
 - Objets de transfert (DTO) en entrée et en sortie des contrôleurs plutôt que des entités JPA.
-- Tests unitaires rapides avec JUnit 5 et Mockito (`@Mock` n'a pas besoin du contexte Spring ; `@MockitoBean` remplace un bean dans un contexte démarré. `@MockBean` n'existe plus depuis Spring Boot 4). Tests d'intégration sur une base réelle éphémère avec Testcontainers.
+- Tests unitaires rapides avec JUnit et Mockito (`@Mock` n'a pas besoin du contexte Spring ; `@MockitoBean` remplace un bean dans un contexte démarré. `@MockBean` n'existe plus depuis Spring Boot 4). Tests d'intégration sur une base réelle éphémère avec Testcontainers.
 - Transactions explicites (`@Transactional`) là où des relations JPA paresseuses sont parcourues.
 - Requêtes paramétrées, toujours : jamais de concaténation de valeurs dans une requête SQL ou JPQL.
 
