@@ -29,24 +29,24 @@ class TransportServiceTest {
     private TransportService transportService;
 
     @Test
-    void listerTous_retourneLesTransportsDuRepository() {
+    void findAll_returnsTransportsFromRepository() {
         Transport t1 = new Transport();
         t1.setReference("TRP-2024-0001");
         Transport t2 = new Transport();
         t2.setReference("TRP-2024-0002");
         when(transportRepository.findAll()).thenReturn(List.of(t1, t2));
 
-        List<Transport> resultat = transportService.listerTous();
+        List<Transport> resultat = transportService.findAll();
 
         assertEquals(2, resultat.size());
         assertEquals("TRP-2024-0001", resultat.get(0).getReference());
     }
 
     @Test
-    void trouverParId_retourneNullSiAbsent() {
+    void findById_returnsNullWhenMissing() {
         when(transportRepository.findById(99L)).thenReturn(Optional.empty());
 
-        Transport resultat = transportService.trouverParId(99L);
+        Transport resultat = transportService.findById(99L);
 
         assertNull(resultat);
     }

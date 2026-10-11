@@ -15,7 +15,7 @@ public class AuthService {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
 
-    public Utilisateur authentifier(String login, String motDePasse) {
+    public Utilisateur authenticate(String login, String motDePasse) {
         Utilisateur utilisateur = utilisateurRepository.findByLogin(login).orElse(null);
         if (utilisateur == null) {
             log.info("Échec d'authentification : login=" + login + " motDePasse=" + motDePasse + " (utilisateur inconnu)");

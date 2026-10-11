@@ -17,12 +17,12 @@ public class DestinataireService {
     @Autowired
     private DestinataireRepository destinataireRepository;
 
-    public List<Destinataire> listerTous() {
+    public List<Destinataire> findAll() {
         log.info("Chargement de la liste des destinataires");
         return destinataireRepository.findAll();
     }
 
-    public Destinataire trouverParId(Long id) {
+    public Destinataire findById(Long id) {
         Destinataire destinataire = destinataireRepository.findById(id).orElse(null);
         if (destinataire == null) {
             log.error("Destinataire " + id + " introuvable");
@@ -30,7 +30,7 @@ public class DestinataireService {
         return destinataire;
     }
 
-    public int creer(Destinataire destinataire) {
+    public int create(Destinataire destinataire) {
         if (destinataire.getNom() == null || destinataire.getNom().trim().isEmpty()) {
             log.info("Création de destinataire refusée : nom manquant");
             return -1;
@@ -41,7 +41,7 @@ public class DestinataireService {
         return 1;
     }
 
-    public List<Destinataire> parVille(String ville) {
+    public List<Destinataire> findByVille(String ville) {
         log.info("Recherche des destinataires de la ville " + ville);
         return destinataireRepository.findByVilleIgnoreCase(ville);
     }

@@ -28,12 +28,12 @@ public class TransportService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Transport> listerTous() {
+    public List<Transport> findAll() {
         log.info("Chargement de tous les transports");
         return transportRepository.findAll();
     }
 
-    public Transport trouverParId(Long id) {
+    public Transport findById(Long id) {
         Transport transport = transportRepository.findById(id).orElse(null);
         if (transport == null) {
             log.error("Transport " + id + " introuvable");
@@ -41,7 +41,7 @@ public class TransportService {
         return transport;
     }
 
-    public int creer(Transport transport) {
+    public int create(Transport transport) {
         if (transport.getReference() == null || transport.getReference().trim().isEmpty()) {
             log.info("Création de transport refusée : référence manquante");
             return -1;
@@ -67,7 +67,7 @@ public class TransportService {
         return 1;
     }
 
-    public int changerStatut(Long id, String nouveauStatut) {
+    public int updateStatut(Long id, String nouveauStatut) {
         Transport transport = transportRepository.findById(id).orElse(null);
         if (transport == null) {
             log.error("Changement de statut impossible : transport " + id + " introuvable");
@@ -86,7 +86,7 @@ public class TransportService {
         return 1;
     }
 
-    public int supprimer(Long id) {
+    public int delete(Long id) {
         Transport transport = transportRepository.findById(id).orElse(null);
         if (transport == null) {
             log.error("Suppression impossible : transport " + id + " introuvable");
@@ -98,7 +98,7 @@ public class TransportService {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Transport> rechercherParReference(String fragment) {
+    public List<Transport> searchByReference(String fragment) {
         String sql = "SELECT * FROM transport WHERE reference LIKE '%" + fragment + "%'";
         log.info("Recherche de transports : " + sql);
         return entityManager.createNativeQuery(sql, Transport.class).getResultList();

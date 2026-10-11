@@ -26,13 +26,13 @@ public class DestinataireController {
     private DestinataireService destinataireService;
 
     @GetMapping
-    public ResponseEntity<?> lister() {
-        return ResponseEntity.ok(destinataireService.listerTous());
+    public ResponseEntity<?> list() {
+        return ResponseEntity.ok(destinataireService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> detail(@PathVariable Long id) {
-        Destinataire destinataire = destinataireService.trouverParId(id);
+    public ResponseEntity<?> get(@PathVariable Long id) {
+        Destinataire destinataire = destinataireService.findById(id);
         if (destinataire == null) {
             return ResponseEntity.notFound().build();
         }
@@ -40,9 +40,9 @@ public class DestinataireController {
     }
 
     @PostMapping
-    public ResponseEntity<?> creer(@RequestBody Destinataire destinataire) {
+    public ResponseEntity<?> create(@RequestBody Destinataire destinataire) {
         try {
-            int code = destinataireService.creer(destinataire);
+            int code = destinataireService.create(destinataire);
             if (code == -1) {
                 return ResponseEntity.badRequest().body("Le nom du destinataire est obligatoire");
             }
@@ -54,7 +54,7 @@ public class DestinataireController {
     }
 
     @GetMapping("/ville/{ville}")
-    public ResponseEntity<?> parVille(@PathVariable String ville) {
-        return ResponseEntity.ok(destinataireService.parVille(ville));
+    public ResponseEntity<?> listByVille(@PathVariable String ville) {
+        return ResponseEntity.ok(destinataireService.findByVille(ville));
     }
 }

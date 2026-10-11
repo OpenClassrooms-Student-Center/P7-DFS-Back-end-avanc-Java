@@ -26,14 +26,14 @@ public class ReleveTemperatureController {
     private ReleveTemperatureService releveTemperatureService;
 
     @GetMapping
-    public ResponseEntity<?> lister(@PathVariable Long transportId) {
-        return ResponseEntity.ok(releveTemperatureService.releves(transportId));
+    public ResponseEntity<?> list(@PathVariable Long transportId) {
+        return ResponseEntity.ok(releveTemperatureService.findByTransport(transportId));
     }
 
     @PostMapping
-    public ResponseEntity<?> ajouter(@PathVariable Long transportId, @RequestBody ReleveTemperature releve) {
+    public ResponseEntity<?> add(@PathVariable Long transportId, @RequestBody ReleveTemperature releve) {
         try {
-            int code = releveTemperatureService.ajouter(transportId, releve);
+            int code = releveTemperatureService.add(transportId, releve);
             if (code == -1) {
                 return ResponseEntity.notFound().build();
             }

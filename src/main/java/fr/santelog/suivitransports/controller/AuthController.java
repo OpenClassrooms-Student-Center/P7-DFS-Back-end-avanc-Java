@@ -31,7 +31,7 @@ public class AuthController {
         try {
             String login = corps.get("login");
             String motDePasse = corps.get("motDePasse");
-            Utilisateur utilisateur = authService.authentifier(login, motDePasse);
+            Utilisateur utilisateur = authService.authenticate(login, motDePasse);
             if (utilisateur == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides");
             }

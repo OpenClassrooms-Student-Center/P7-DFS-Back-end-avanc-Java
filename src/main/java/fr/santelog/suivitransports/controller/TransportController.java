@@ -31,13 +31,13 @@ public class TransportController {
     private TransportService transportService;
 
     @GetMapping
-    public ResponseEntity<?> lister() {
-        return ResponseEntity.ok(transportService.listerTous());
+    public ResponseEntity<?> list() {
+        return ResponseEntity.ok(transportService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> detail(@PathVariable Long id) {
-        Transport transport = transportService.trouverParId(id);
+    public ResponseEntity<?> get(@PathVariable Long id) {
+        Transport transport = transportService.findById(id);
         if (transport == null) {
             return ResponseEntity.notFound().build();
         }
@@ -45,9 +45,9 @@ public class TransportController {
     }
 
     @PostMapping
-    public ResponseEntity<?> creer(@RequestBody Transport transport) {
+    public ResponseEntity<?> create(@RequestBody Transport transport) {
         try {
-            int code = transportService.creer(transport);
+            int code = transportService.create(transport);
             if (code == -1) {
                 return ResponseEntity.badRequest().body("La référence du transport est obligatoire");
             }
@@ -65,16 +65,16 @@ public class TransportController {
     }
 
     @PutMapping("/{id}/statut")
-    public ResponseEntity<?> changerStatut(@PathVariable Long id, @RequestBody Map<String, String> corps) {
+    public ResponseEntity<?> updateStatut(@PathVariable Long id, @RequestBody Map<String, String> corps) {
         try {
-            int code = transportService.changerStatut(id, corps.get("statut"));
+            int code = transportService.updateStatut(id, corps.get("statut"));
             if (code == -1) {
                 return ResponseEntity.notFound().build();
             }
             if (code == -2) {
                 return ResponseEntity.badRequest().body("Statut inconnu : " + corps.get("statut"));
             }
-            return ResponseEntity.ok(transportService.trouverParId(id));
+            return ResponseEntity.ok(transportService.findById(id));
         } catch (Exception e) {
             log.error("Erreur lors du changement de statut du transport " + id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
@@ -82,9 +82,9 @@ public class TransportController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> supprimer(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
-            int code = transportService.supprimer(id);
+            int code = transportService.delete(id);
             if (code == -1) {
                 return ResponseEntity.notFound().build();
             }
@@ -96,7 +96,7 @@ public class TransportController {
     }
 
     @GetMapping("/recherche")
-    public ResponseEntity<?> rechercher(@RequestParam("q") String q) {
-        return ResponseEntity.ok(transportService.rechercherParReference(q));
+    public ResponseEntity<?> search(@RequestParam("q") String q) {
+        return ResponseEntity.ok(transportService.searchByReference(q));
     }
 }

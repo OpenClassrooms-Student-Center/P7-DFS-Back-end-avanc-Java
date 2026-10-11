@@ -22,7 +22,7 @@ public class RapportService {
     @Autowired
     private TransportRepository transportRepository;
 
-    public Map<String, Object> rapportTransport(Long transportId) {
+    public Map<String, Object> buildRapportTransport(Long transportId) {
         Transport transport = transportRepository.findById(transportId).orElse(null);
         if (transport == null) {
             log.error("Rapport demandé pour un transport introuvable : " + transportId);
@@ -119,7 +119,7 @@ public class RapportService {
         return rapport;
     }
 
-    public Map<String, Object> synthese() {
+    public Map<String, Object> buildSynthese() {
         log.info("Génération de la synthèse globale");
         List<Transport> transports = transportRepository.findAll();
 

@@ -25,9 +25,9 @@ public class RapportController {
     private RapportService rapportService;
 
     @GetMapping("/transports/{id}")
-    public ResponseEntity<?> rapportTransport(@PathVariable Long id) {
+    public ResponseEntity<?> getRapportTransport(@PathVariable Long id) {
         try {
-            Map<String, Object> rapport = rapportService.rapportTransport(id);
+            Map<String, Object> rapport = rapportService.buildRapportTransport(id);
             if (rapport == null) {
                 return ResponseEntity.notFound().build();
             }
@@ -39,9 +39,9 @@ public class RapportController {
     }
 
     @GetMapping("/synthese")
-    public ResponseEntity<?> synthese() {
+    public ResponseEntity<?> getSynthese() {
         try {
-            return ResponseEntity.ok(rapportService.synthese());
+            return ResponseEntity.ok(rapportService.buildSynthese());
         } catch (Exception e) {
             log.error("Erreur lors de la génération de la synthèse", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());

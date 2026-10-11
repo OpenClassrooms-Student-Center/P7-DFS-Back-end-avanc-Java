@@ -21,12 +21,12 @@ class DestinataireServiceTest {
     private DestinataireService destinataireService;
 
     @Test
-    void creer_retourneUnQuandNomPresent() {
+    void create_returnsOneWhenNomPresent() {
         Destinataire destinataire = new Destinataire();
         destinataire.setNom("CHU de Lille");
         destinataire.setVille("Lille");
 
-        int code = destinataireService.creer(destinataire);
+        int code = destinataireService.create(destinataire);
 
         assertEquals(1, code);
         verify(destinataireRepository).save(destinataire);

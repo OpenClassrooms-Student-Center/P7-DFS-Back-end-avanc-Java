@@ -24,12 +24,12 @@ public class ReleveTemperatureService {
     @Autowired
     private TransportRepository transportRepository;
 
-    public List<ReleveTemperature> releves(Long transportId) {
+    public List<ReleveTemperature> findByTransport(Long transportId) {
         log.info("Chargement des relevés du transport " + transportId);
         return releveTemperatureRepository.findByTransportIdOrderByHorodatageAsc(transportId);
     }
 
-    public int ajouter(Long transportId, ReleveTemperature releve) {
+    public int add(Long transportId, ReleveTemperature releve) {
         Transport transport = transportRepository.findById(transportId).orElse(null);
         if (transport == null) {
             log.error("Ajout de relevé impossible : transport " + transportId + " introuvable");
