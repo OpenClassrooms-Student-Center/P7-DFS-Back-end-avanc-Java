@@ -7,8 +7,9 @@ Version en production : 1.4.2.
 ## Prérequis
 
 - Java 25 (JDK)
-- Maven 3.9 ou supérieur
 - Docker et Docker Compose (pour la base de données de développement)
+
+Maven n'a pas besoin d'être installé : le dépôt contient le wrapper `./mvnw` (`mvnw.cmd` sous Windows).
 
 ## Installation
 
@@ -17,7 +18,7 @@ git clone <url-du-depot> suivi-transports
 cd suivi-transports
 cp .env.example .env
 docker compose up -d
-mvn clean install
+./mvnw clean install
 ```
 
 Le fichier `.env` alimente le service PostgreSQL décrit dans `compose.yaml`. Les paramètres de connexion de l'application se trouvent dans `src/main/resources/application.properties`.
@@ -25,7 +26,7 @@ Le fichier `.env` alimente le service PostgreSQL décrit dans `compose.yaml`. Le
 ## Lancement
 
 ```bash
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 L'application écoute sur `http://localhost:8080`. Au premier démarrage sur une base vide, un jeu de données de démonstration est inséré automatiquement (utilisateurs, destinataires, transports et relevés).
@@ -48,7 +49,7 @@ Documentation interactive de l'API : `http://localhost:8080/swagger-ui.html`
 - PostgreSQL 16
 - springdoc-openapi 3.1.1 (Swagger UI)
 - JUnit 6 et Mockito (tests)
-- Maven
+- Maven (wrapper fourni)
 
 ## Structure du projet
 
@@ -142,9 +143,9 @@ Un relevé dont la valeur sort de la plage `[temperatureMin, temperatureMax]` du
 |--------------------------|----------------------------------------------|
 | `docker compose up -d`   | Démarre PostgreSQL                           |
 | `docker compose down`    | Arrête PostgreSQL (les données sont conservées dans le volume `santelog-pgdata`) |
-| `mvn spring-boot:run`    | Lance l'application                          |
-| `mvn test`               | Exécute la suite de tests                    |
-| `mvn clean package`      | Produit le `.jar` dans `target/`             |
+| `./mvnw spring-boot:run` | Lance l'application                          |
+| `./mvnw test`            | Exécute la suite de tests                    |
+| `./mvnw clean package`   | Produit le `.jar` dans `target/`             |
 
 ## Pipeline
 

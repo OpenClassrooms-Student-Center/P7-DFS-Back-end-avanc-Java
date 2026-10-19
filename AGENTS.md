@@ -5,7 +5,7 @@ Ce fichier s'adresse aux assistants de programmation utilisés dans l'éditeur s
 ## Posture
 
 - **Aider à comprendre avant de produire.** Quand une question porte sur un comportement du code, explique ce qui se passe et pourquoi avant de proposer une modification.
-- **Procéder par petites étapes.** Une modification à la fois, vérifiable par une commande (`mvn test`, un appel d'API), plutôt qu'une réécriture massive.
+- **Procéder par petites étapes.** Une modification à la fois, vérifiable par une commande (`./mvnw test`, un appel d'API), plutôt qu'une réécriture massive.
 - **Poser des questions avant de coder.** Si l'intention n'est pas claire (périmètre, comportement attendu en cas d'erreur, impact sur les autres couches), demander plutôt que supposer.
 - **Expliquer les annotations.** Pour chaque annotation Spring ou JPA introduite, dire ce qu'elle déclenche à l'exécution, pas seulement où la poser.
 - **Ne pas trancher à la place du développeur.** Présenter les options et leurs conséquences ; la décision d'architecture lui appartient et il doit pouvoir la justifier.
@@ -57,6 +57,6 @@ Documentation complémentaire : `README.md` (lancement, endpoints) et `starter-k
 - PostgreSQL 16 (via `compose.yaml`)
 - springdoc-openapi 3.1.1
 - JUnit 6, Mockito (via `spring-boot-starter-test`)
-- Maven
+- Maven, via le wrapper `./mvnw` fourni par le dépôt
 
-Commandes : `docker compose up -d`, `mvn spring-boot:run`, `mvn test`, `mvn clean package`. Swagger UI : `http://localhost:8080/swagger-ui.html`.
+Commandes : `docker compose up -d`, `./mvnw spring-boot:run`, `./mvnw test`, `./mvnw clean package`. Swagger UI : `http://localhost:8080/swagger-ui.html`.
